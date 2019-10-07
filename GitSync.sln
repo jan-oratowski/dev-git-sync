@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.779
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitSync", "GitSync\GitSync.csproj", "{F308B2D9-D201-478D-B610-5C3E3879C98B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F308B2D9-D201-478D-B610-5C3E3879C98B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F308B2D9-D201-478D-B610-5C3E3879C98B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F308B2D9-D201-478D-B610-5C3E3879C98B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F308B2D9-D201-478D-B610-5C3E3879C98B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F693403D-B670-412A-97F3-C6A615F4DC6D}
+	EndGlobalSection
+EndGlobal
