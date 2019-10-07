@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace GitSync
 {
@@ -6,7 +7,10 @@ namespace GitSync
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var repos = new List<string> {"gitlab"};
+            var worker = new GitWorker(repos);
+
+            worker.Run("C:\\test");
         }
     }
 }
