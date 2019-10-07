@@ -8,7 +8,7 @@ namespace GitSync
     {
         private static void Main(string[] args)
         {
-            var repos = new List<string> {"gitlab"};
+            var repos = new List<string> {"gitlab", "azure"};
             var worker = new GitWorker(repos);
 
             var path = string.Empty;
