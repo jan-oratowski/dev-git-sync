@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
 
 namespace GitSync
 {
@@ -28,7 +27,7 @@ namespace GitSync
 
         private void PullGitRepo(string repoPath)
         {
-            Console.WriteLine($"Pulling {repoPath}");
+            Logger.TrackEvent($"Pulling {repoPath}");
             using (var process = new Process())
             {
                 process.StartInfo.UseShellExecute = true;
@@ -42,7 +41,7 @@ namespace GitSync
 
         private void PushGitRepo(string service, string repoPath)
         {
-            Console.WriteLine($"Pushing {repoPath} to {service}");
+            Logger.TrackEvent($"Pushing {repoPath} to {service}");
             using (var process = new Process())
             {
                 process.StartInfo.UseShellExecute = true;

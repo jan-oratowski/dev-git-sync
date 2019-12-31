@@ -12,12 +12,17 @@ namespace GitSync
             var worker = new GitWorker(repos);
 
             var path = string.Empty;
+
             if (args.Length > 0)
                 path = args[0];
+
+            if (args.Length > 1)
+                Logger.InitAppInsights(args[1]);
 
             while (true)
             {
                 worker.Run(path);
+                Logger.TrackEvent("Service sleeping for 6 hours");
                 Thread.Sleep(new TimeSpan(6,0,0));
             }
             
