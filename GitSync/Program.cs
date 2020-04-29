@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using GitSync.Commands;
 using GitSync.Models;
 
 namespace GitSync
@@ -9,6 +11,7 @@ namespace GitSync
     {
         public static string ConfigPath;
         public static Config Config;
+        private static List<ICommand> _commands;
         private static void Main(string[] args)
         {
             ConfigPath = GetArgument(args, "--config", "config.json");
@@ -17,15 +20,11 @@ namespace GitSync
             if (!string.IsNullOrEmpty(Config.AppInsights))
                 Logger.InitAppInsights(Config.AppInsights);
 
-            var worker = new GitWorker(repos);
-
-            while (true)
+            foreach (var s in args)
             {
-                worker.Run(path);
-                Logger.TrackEvent("Service sleeping for 6 hours");
-                Thread.Sleep(new TimeSpan(6, 0, 0));
+                var command = _commands.FirstOrDefault(c => c.Argument == s);
+                command?.DoWork();
             }
-
         }
 
         private static string GetArgument(string[] args, string argument, string defaultValue = null)
