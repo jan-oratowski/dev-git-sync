@@ -15,6 +15,12 @@ namespace GitSync
             _repoPath = repoPath;
         }
 
+        public void Commit()
+        {
+            Run("add .");
+            Run($"commit -a -m \"Auto commit @ {DateTime.Now}\"");
+        }
+
         public List<string> ListRemotes()
         {
             var remotes = Run("remote");

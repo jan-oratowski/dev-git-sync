@@ -11,7 +11,8 @@ namespace GitSync
     {
         public static string ConfigPath;
         public static Config Config;
-        private static List<ICommand> _commands;
+        private static readonly List<ICommand> Commands = new List<ICommand>();
+
         private static void Main(string[] args)
         {
             ConfigPath = GetArgument(args, "--config", "config.json");
@@ -20,9 +21,11 @@ namespace GitSync
             if (!string.IsNullOrEmpty(Config.AppInsights))
                 Logger.InitAppInsights(Config.AppInsights);
 
+            RegisterCommands();
+
             foreach (var s in args)
             {
-                var command = _commands.FirstOrDefault(c => c.Argument == s);
+                var command = Commands.FirstOrDefault(c => c.Argument == s);
                 command?.DoWork();
             }
         }
@@ -34,5 +37,12 @@ namespace GitSync
                 : defaultValue;
         }
 
+        private static void RegisterCommands()
+        {
+            Commands.Add(new CommitAll());
+            Commands.Add(new PullAll());
+            Commands.Add(new PushAll());
+            Commands.Add(new Service());
+        }
     }
 }
