@@ -8,24 +8,41 @@ namespace GitSync.Models
 {
     public class Config
     {
-        public List<string> Paths;
-        public List<string> Remotes;
+        public List<string> Paths = new List<string>();
+        public List<string> Remotes = new List<string>();
         public int SyncEveryHours;
         public string AppInsights;
+        public string ConfigPath;
 
-        public static Config LoadConfig(string configFile)
+        public static Config Load(string configFile)
         {
             if (!File.Exists(configFile))
-                SaveConfig(new Config(), configFile);
+                Save(new Config(), configFile);
 
             var text = File.ReadAllText(configFile);
-            return JsonConvert.DeserializeObject<Config>(text);
+            var config = JsonConvert.DeserializeObject<Config>(text);
+            config.ConfigPath = configFile;
+            return config;
         }
 
-        public static void SaveConfig(Config config, string configFile)
+        public static void Save(Config config, string configFile)
         {
             File.WriteAllText(configFile,
                 Newtonsoft.Json.JsonConvert.SerializeObject(config, Formatting.Indented));
+            config.ConfigPath = configFile;
         }
+
+        public string AddPathToConfig()
+        {
+            Console.WriteLine("No paths specified in config.");
+            Console.WriteLine("Please enter the new path:");
+            var path = Console.ReadLine();
+            Paths.Add(path);
+            Save(this, this.ConfigPath);
+            Console.WriteLine("Config saved.");
+            Console.WriteLine();
+            return path;
+        }
+
     }
 }

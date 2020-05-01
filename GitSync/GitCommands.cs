@@ -15,6 +15,11 @@ namespace GitSync
             _repoPath = repoPath;
         }
 
+        public void Checkout(string origin)
+        {
+
+        }
+
         public void Commit()
         {
             Run("add .");
