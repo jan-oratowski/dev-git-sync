@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DependencyCollector;
@@ -9,19 +10,20 @@ namespace GitSync
     internal static class Logger
     {
         private static TelemetryClient _telemetryClient;
+        private static string _appName;
 
         public static void TrackEvent(string content)
         {
             Console.WriteLine($"{DateTime.Now} : {content}");
-            _telemetryClient?.TrackEvent(content);
+            _telemetryClient?.TrackEvent(content, new Dictionary<string, string> { { "AppName", _appName } });
         }
         public static void TrackError(Exception ex)
         {
             Console.WriteLine($"{DateTime.Now} : {ex.Message}");
-            _telemetryClient?.TrackException(ex);
+            _telemetryClient?.TrackException(ex, new Dictionary<string, string> {{ "AppName", _appName }});
         }
 
-        public static void InitAppInsights(string instrumentationKey)
+        public static void InitAppInsights(string instrumentationKey, string appName)
         {
             var configuration = TelemetryConfiguration.CreateDefault();
 
@@ -29,6 +31,7 @@ namespace GitSync
             configuration.TelemetryInitializers.Add(new HttpDependenciesParsingTelemetryInitializer());
 
             _telemetryClient = new TelemetryClient(configuration);
+            _appName = appName;
         }
 
         public static void CloseAppInsights()
