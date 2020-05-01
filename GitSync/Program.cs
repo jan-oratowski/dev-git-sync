@@ -16,10 +16,10 @@ namespace GitSync
         private static void Main(string[] args)
         {
             ConfigPath = GetArgument(args, "--config", "config.json");
-            Config = Config.LoadConfig(ConfigPath);
+            Config = Config.Load(ConfigPath);
 
             if (!string.IsNullOrEmpty(Config.AppInsights))
-                Logger.InitAppInsights(Config.AppInsights);
+                Logger.InitAppInsights(Config.AppInsights, "GitSync");
 
             RegisterCommands();
 
