@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.779
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitSync", "GitSync\GitSync.csproj", "{F308B2D9-D201-478D-B610-5C3E3879C98B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GitSync", "GitSync\GitSync.csproj", "{F308B2D9-D201-478D-B610-5C3E3879C98B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConfigTools", "..\dev-wpsetup\WpSetup\ConfigTools\ConfigTools.csproj", "{EAC7DFDC-A32D-4F16-A1F8-1B1EBCC785FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitUI", "GitUI\GitUI.csproj", "{BA98AF24-77EA-4F3C-885A-223746586453}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{F308B2D9-D201-478D-B610-5C3E3879C98B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F308B2D9-D201-478D-B610-5C3E3879C98B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F308B2D9-D201-478D-B610-5C3E3879C98B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAC7DFDC-A32D-4F16-A1F8-1B1EBCC785FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAC7DFDC-A32D-4F16-A1F8-1B1EBCC785FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAC7DFDC-A32D-4F16-A1F8-1B1EBCC785FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAC7DFDC-A32D-4F16-A1F8-1B1EBCC785FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA98AF24-77EA-4F3C-885A-223746586453}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA98AF24-77EA-4F3C-885A-223746586453}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA98AF24-77EA-4F3C-885A-223746586453}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA98AF24-77EA-4F3C-885A-223746586453}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
