@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace GitSync.Commands
 {
@@ -14,11 +15,21 @@ namespace GitSync.Commands
 
         private void Pull(string pathToRepos)
         {
+            var tasks = new List<Task>();
+
             foreach (var directory in System.IO.Directory.GetDirectories(pathToRepos))
             {
-                var git = new GitCommands(directory);
-                git.Pull();
+                var task = Task.Factory.StartNew(() => PullSingle(directory));
+                tasks.Add(task);
             }
+
+            Task.WaitAll(tasks.ToArray());
+        }
+
+        private void PullSingle(string directory)
+        {
+            var git = new GitCommands(directory);
+            git.Pull();
         }
     }
 }

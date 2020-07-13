@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace GitSync.Commands
 {
@@ -21,12 +22,22 @@ namespace GitSync.Commands
 
         private void ListAndSync(string pathToRepos)
         {
+            var tasks = new List<Task>();
+
             foreach (var directory in System.IO.Directory.GetDirectories(pathToRepos))
             {
-                var git = new GitCommands(directory);
-                git.Pull();
-                git.PushAll();
+                var task = Task.Factory.StartNew(() => PullAndPushAll(directory));
+                tasks.Add(task);
             }
+
+            Task.WaitAll(tasks.ToArray());
+        }
+
+        private void PullAndPushAll(string directory)
+        {
+            var git = new GitCommands(directory);
+            git.Pull();
+            git.PushAll();
         }
     }
 }

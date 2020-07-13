@@ -37,7 +37,7 @@ namespace GitSync
             Logger.TrackEvent($"Pulling {_repoPath} from {remote}");
             Run($"pull {remote}");
         }
-        
+
         public void Push(string remote = "origin")
         {
             Logger.TrackEvent($"Pushing {_repoPath} to {remote}");
