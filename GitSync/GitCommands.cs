@@ -16,9 +16,14 @@ namespace GitSync
             _repoPath = repoPath;
         }
 
-        public void Checkout(string origin)
+        public void AddRemote(string remoteUrl, string remoteName)
         {
+            Run($"remote add {remoteName} {remoteUrl}");
+        }
 
+        public void Clone(string originUrl)
+        {
+            Run($"clone {originUrl} {_repoPath}", true);
         }
 
         public void Commit()
@@ -53,14 +58,14 @@ namespace GitSync
 
         public void PushAll(List<string> remotes) => remotes.ForEach(Push);
 
-        private string Run(string arguments)
+        private string Run(string arguments, bool ignoreDirectory = false)
         {
             using (var process = new Process())
             {
                 process.StartInfo.UseShellExecute = true;
                 process.StartInfo.FileName = "git.exe";
                 process.StartInfo.Arguments = arguments;
-                process.StartInfo.WorkingDirectory = _repoPath;
+                process.StartInfo.WorkingDirectory = ignoreDirectory ? @"C:\" : _repoPath;
                 process.StartInfo.UseShellExecute = false;
                 process.StartInfo.RedirectStandardOutput = true;
 

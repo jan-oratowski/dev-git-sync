@@ -44,6 +44,7 @@ namespace GitSync
             Commands.Add(new PushAll());
             Commands.Add(new Service());
             Commands.Add(new ListRemotes());
+            Commands.Add(new New());
         }
     }
 }
