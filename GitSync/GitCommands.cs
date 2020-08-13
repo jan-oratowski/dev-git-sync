@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -26,13 +27,19 @@ namespace GitSync
             Run($"commit -a -m \"Auto commit @ {DateTime.Now}\"");
         }
 
+        public bool IsGitRepository()
+        {
+            return Directory.GetDirectories(_repoPath).Any(d => d.Contains(".git"));
+        }
+
         public List<string> ListRemotes()
         {
             var remotes = Run("remote");
-            return remotes.Split("\n\r", StringSplitOptions.RemoveEmptyEntries).ToList();
+            var list = remotes.Split("\n", StringSplitOptions.RemoveEmptyEntries).ToList();
+            return list;
         }
 
-        public void Pull(string remote = "origin")
+        public void Pull(string remote = "")
         {
             Logger.TrackEvent($"Pulling {_repoPath} from {remote}");
             Run($"pull {remote}");
@@ -44,7 +51,7 @@ namespace GitSync
             Run($"push {remote}");
         }
 
-        public void PushAll() => ListRemotes().ForEach(Push);
+        public void PushAll(List<string> remotes) => remotes.ForEach(Push);
 
         private string Run(string arguments)
         {
@@ -54,6 +61,8 @@ namespace GitSync
                 process.StartInfo.FileName = "git.exe";
                 process.StartInfo.Arguments = arguments;
                 process.StartInfo.WorkingDirectory = _repoPath;
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.RedirectStandardOutput = true;
 
                 process.Start();
                 process.WaitForExit();

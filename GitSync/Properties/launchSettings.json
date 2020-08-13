@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "GitSync": {
+      "commandName": "Project",
+      "commandLineArgs": "list-remotes"
+    }
+  }
+}

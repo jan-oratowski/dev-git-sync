@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,7 +30,8 @@ namespace GitSync.Commands
         private void PullSingle(string directory)
         {
             var git = new GitCommands(directory);
-            git.Pull();
+            if (git.IsGitRepository() && git.ListRemotes().Any())
+                git.Pull();
         }
     }
 }

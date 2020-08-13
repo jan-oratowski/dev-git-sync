@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DependencyCollector;
@@ -14,13 +16,23 @@ namespace GitSync
 
         public static void TrackEvent(string content)
         {
-            Console.WriteLine($"{DateTime.Now} : {content}");
+            var dateAndContent = $"{DateTime.Now} : {content}";
+            Console.WriteLine(dateAndContent);
+            WriteToFile(dateAndContent);
             _telemetryClient?.TrackEvent(content, new Dictionary<string, string> { { "AppName", _appName } });
         }
         public static void TrackError(Exception ex)
         {
-            Console.WriteLine($"{DateTime.Now} : {ex.Message}");
-            _telemetryClient?.TrackException(ex, new Dictionary<string, string> {{ "AppName", _appName }});
+            var dateAndContent = $"{DateTime.Now} : {ex.Message}";
+            Console.WriteLine(dateAndContent);
+            WriteToFile(dateAndContent);
+            _telemetryClient?.TrackException(ex, new Dictionary<string, string> { { "AppName", _appName } });
+        }
+
+        private static void WriteToFile(string content)
+        {
+            var fileName = $"log-{DateTime.Now:yyyy-MM-dd}.log";
+            File.AppendAllText(fileName, content + "\n");
         }
 
         public static void InitAppInsights(string instrumentationKey, string appName)
