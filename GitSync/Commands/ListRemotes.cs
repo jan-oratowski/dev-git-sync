@@ -12,12 +12,8 @@ namespace GitSync.Commands
         public void DoWork()
         {
             foreach (var path in Program.Config.Paths)
-            {
                 foreach (var directory in Directory.GetDirectories(path))
-                {
                     ListAndPrint(directory);
-                }
-            }
         }
 
         private void ListAndPrint(string path)
